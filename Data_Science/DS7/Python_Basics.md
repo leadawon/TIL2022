@@ -7,7 +7,7 @@ We dealt with “numpy”, “Matplotlib” and “pandas”.
 
 # Lab: Hello Python!
 
-####### Lab2: The Python Interface
+###### Lab2: The Python Interface
 ```python
 # Example, do not modify!
 print(5 / 8)
@@ -19,6 +19,6 @@ result
 0.625
 
 17
-
+: sdda
 ###### 
 ```python
