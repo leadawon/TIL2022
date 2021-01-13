@@ -27,4 +27,11 @@ result
 2. For your new business, you want to develop a database-driven website.
 3. Your boss asks you to clean and analyze the results of the latest satisfaction survey.
 
-###### 
+###### Lab3: Any comments?
+```python
+# Just testing division
+print(5 / 8)
+
+# Addition works too
+print(7 + 10)
+```
