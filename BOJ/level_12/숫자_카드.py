@@ -18,3 +18,25 @@
 예제 출력 1 
 1 0 0 1 1 0 0 1
 '''
+import sys
+n=int(sys.stdin.readline())
+sangarr=list(map(int,sys.stdin.readline().split()))
+m=int(sys.stdin.readline())
+cardarr=list(map(int,sys.stdin.readline().split()))
+
+sangarr.sort()
+for i in range(m):
+    sindex=0
+    eindex=n-1
+    while True:
+        if cardarr[i]<sangarr[(sindex+eindex)//2]:
+            eindex=(sindex+eindex)//2-1
+        elif cardarr[i]>sangarr[(sindex+eindex)//2]:
+            sindex=(sindex+eindex)//2+1
+        elif cardarr[i]==sangarr[(sindex+eindex)//2]:
+            sys.stdout.write("1 ")
+            break
+        if sindex>eindex or (sindex==eindex and cardarr[i]!=sangarr[(sindex+eindex)//2]):
+            sys.stdout.write("0 ")
+            break
+
