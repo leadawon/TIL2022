@@ -57,3 +57,25 @@ Venusaur
 16
 14
 '''
+import sys
+
+n,m = map(int,sys.stdin.readline().split())
+
+
+dogam={}
+
+for i in range(1,n+1):
+    poke=sys.stdin.readline()
+    poke=poke.strip("\n")
+    dogam[i]=poke
+    dogam[poke]=i
+
+for j in range(m):
+    cmd=sys.stdin.readline()
+    cmd = cmd.strip("\n")
+    if cmd.isdigit():
+        print(dogam[int(cmd)])
+    else:
+        print(dogam[cmd])
+
+
