@@ -60,10 +60,51 @@ T=int(input())
 for i in range(T):
     pat = list(input().rstrip())
     lngstr = list(input().rstrip())
-    arr = {}
+    skip = {}
+    flag = False
     for j in range(ord('A'), ord('Z')+1):
-        arr[chr(j)] = len(pat)
+        skip[chr(j)] = len(pat)
 
     for j in range(len(pat)):
-        arr[pat[j]] = len(pat)-j-1
-    print(arr)
+        skip[pat[j]] = len(pat)-j-1
+
+    lngstr_header = 0
+    pat_header = len(pat)-1
+    temp = 0
+    while True:
+        if lngstr[lngstr_header] == pat[pat_header]:
+            if pat_header == 0:
+                flag = True
+                break
+            elif lngstr_header != 0: #아직 검사해야할 패턴과 주어진 스트링이 남아있을때 역행하면서 검사할것이다.
+                if temp != lngstr_header and pat_header == len(pat)-1: #역행하기전 꼬리부분 저장
+                    temp = lngstr_header
+                pat_header -= 1
+                lngstr_header -= 1
+                continue
+            else: #검사해야할 패턴이 남아있지만 주어진 스트링의 앞부분으로 거슬러 올라갈 부분이 없을때
+                lngstr_header = temp + 1
+                if lngstr_header > len(lngstr) - 1:
+                    break
+                pat_header = len(pat)-1
+                continue
+        elif lngstr_header == len(lngstr)-1: #끝까지 가봤는데 같은 부분이 없을때
+            break
+        elif pat_header == len(pat)-1:  #끝부분이 다를때, 일반적으로 틀린 경우, 점프해야 하는경우
+            lngstr_header += skip[lngstr[lngstr_header]]
+            if lngstr_header > len(lngstr)-1:
+                break
+            continue
+
+        else: #패턴의 끝부분이 일치함을 보였고 다음 패턴을 확인하던 중에 패턴과 스트링의 비교부분이 다를떄
+            lngstr_header = temp + 1          #이 1을 바꿀수 없을까? 더 좋은 방법이 있긴 할듯...
+            if lngstr_header > len(lngstr) - 1:
+                break
+            pat_header = len(pat) - 1
+
+    if flag==True:
+        print("#%s 1" %(i+1))
+    else:
+        print("#%s 0" %(i+1))
+
+
