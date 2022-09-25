@@ -68,9 +68,9 @@ sample_input.txt
 #3 168	 
 sample_output.txt
 '''
-#import sys
+import sys
 from collections import deque
-#sys.stdin = open("testcase.txt","r")
+sys.stdin = open("testcase.txt","r")
 
 dq=deque()
 ans = []
