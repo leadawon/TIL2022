@@ -34,3 +34,26 @@ for i in range(1,N):
             ans.append(0)
 for i in range(N):
     sys.stdout.write("{} ".format(ans[i]))
+######################################
+# 맞은거
+import sys
+N = int(sys.stdin.readline())
+towers = list(map(int,sys.stdin.readline().split())) 
+ans = [0]
+stack = [[0,towers[0]]]
+
+for i in range(1,N):
+    while stack:
+        if stack[-1][1] >= towers[i]:
+            ans.append(stack[-1][0] + 1)
+            break
+        else:
+            stack.pop()
+
+        if len(stack) == 0:
+            ans.append(0)
+    stack.append([i,towers[i]])
+
+for i in ans:
+    sys.stdout.write("{} ".format(i))
+
