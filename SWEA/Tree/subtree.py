@@ -108,7 +108,7 @@ for i in range(t):
             stack.append(arr[parent][0])
             cnt += 1
             if arr[parent][1] != 0:
-                stack.append(arr[parent][0])
+                stack.append(arr[parent][1])
                 cnt += 1
     print(f"#{i+1} {cnt}")
         
