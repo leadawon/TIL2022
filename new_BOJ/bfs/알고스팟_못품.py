@@ -67,5 +67,91 @@ for i in range(m*n):
             costarr[0][j] = costarr[0][current]+costarr[current][j]
 print(costarr[0][-1])
 #print(costarr)
+#---------------------------------------------------------------------------------------------
+import sys
+from collections import defaultdict
+n,m = map(int,sys.stdin.readline().split())
+
+arr = []
+
+#m행 n열
+#0부터 오른족 끝 열 n-1열
+for i in range(m):
+    arr.append(list(sys.stdin.readline().rstrip()))
+#costarr = [[11111] * (m*n) for _ in range(m*n)]
+costarr = defaultdict()
+for i in range(m*n):
+    costarr[i] = defaultdict(lambda: 11111)
+
+
+
+
+
+for i in range(m):
+    for j in range(n):
+        costarr[n*i+j][n*i+j]=0
+        if i != 0:
+            if not costarr[n*i+j][n * (i-1) + j] == 1:
+                costarr[n * i + j][n * (i - 1) + j] = 0
+            costarr[n * (i-1) + j][n * i + j] = 0
+        if j != n - 1:
+            if not costarr[n * i + j][n*i + j + 1] == 1:
+                costarr[n * i + j][n*i + j + 1] = 0
+            #costarr[n * i + j][n*i + j + 1] = 0
+            costarr[n*i + j + 1][n * i + j] = 0
+        if i != m - 1:
+            if not costarr[n * i + j][n * (i+1) + j] == 1:
+                costarr[n * i + j][n * (i+1) + j] = 0
+            #costarr[n * i + j][n * (i+1) + j] = 0
+            costarr[n * (i+1) + j][n * i + j] = 0
+        if j != 0:
+            if not costarr[n * i + j][n*i + j - 1] == 1:
+                costarr[n * i + j][n*i + j - 1] = 0
+            #costarr[n * i + j][n*i + j - 1] = 0
+            costarr[n*i + j - 1][n * i + j] = 0
+        if arr[i][j]=="1":
+            if i != 0:
+                #costarr[n*i+j][n * (i-1) + j]=1
+                costarr[n * (i-1) + j][n * i + j]=1
+            if j != n-1:
+                #costarr[n * i + j][n*i + j + 1]=1
+                costarr[(n*i) + j + 1][n * i + j]=1
+            if i != m-1:
+                #costarr[n * i + j][(n * (i+1) + j]=1
+                costarr[n * (i+1) + j][n * i + j]=1
+            if j != 0:
+                #costarr[n * i + j][n*i + j-1]=1
+                costarr[n*i + j - 1][n * i + j]=1
+#del arr
+
+#print(costarr.shape)
+visited = [False]*(m*n)
+visited[0] = True
+outer = False
+for i in range(m*n):
+    min1 = 11111
+    current = 0
+    for key,j in costarr[0].items():
+        if j < min1 and visited[key] != True:
+            min1 = j
+            current = key
+    visited[current] = True
+    if current == m*n-1:####
+        outer = True#####
+    for key,val in costarr[current].items():
+        if (not visited[key]) and costarr[0][current]+val < costarr[0][key]:
+            costarr[0][key] = costarr[0][current]+val
+            if j==m*n-1:#######
+                outer = True#######
+                #break
+            if outer:###
+                break###
+    if outer:###
+        break###
+    #del costarr[current]
+print(costarr[0][m*n-1])
+#print(costarr)
+
+
 
 
